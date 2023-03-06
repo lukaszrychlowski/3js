@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { Group } from 'three';
 console.log(THREE);
 
 function log_output(mesh, camera) {
@@ -6,6 +7,7 @@ function log_output(mesh, camera) {
     console.log(mesh.position.length());
     console.log('dist to camera:')
     console.log(mesh.position.distanceTo(camera.position));
+    
 }
 
 // sizes
@@ -14,17 +16,33 @@ const sizes = {
     height: 600
 };
 
-// scene
+//object
 const scene = new THREE.Scene();
 
-// geometry
-const geometry = new THREE.BoxGeometry(1,1,1); //cube
-const material = new THREE.MeshBasicMaterial({color: 0xb6b0ff});
-const mesh = new THREE.Mesh(geometry, material);
-mesh.position.x = 0;
-mesh.position.y = 0;
-mesh.position.z = 0;
-scene.add(mesh);
+const group = new THREE.Group();
+scene.add(group);
+
+const cube1 = new THREE.Mesh(
+    new THREE.BoxGeometry(1,1,1),
+    new THREE.MeshBasicMaterial( { color: 0x00ff00})
+);
+group.add(cube1);
+
+const cube2 = new THREE.Mesh(
+    new THREE.BoxGeometry(1,1,1),
+    new THREE.MeshBasicMaterial( { color: 0xff0000})
+);
+group.add(cube2);
+
+cube2.position.x = -2;
+
+const cube3 = new THREE.Mesh(
+    new THREE.BoxGeometry(1,1,1),
+    new THREE.MeshBasicMaterial( { color: 0x0000ff})
+);
+group.add(cube3);
+
+cube3.position.x = 2;
 
 //axes
 const axesHelper = new THREE.AxesHelper();
@@ -35,7 +53,7 @@ const camera = new THREE.PerspectiveCamera(75, sizes.width/sizes.height);
 camera.position.z = 5;
 scene.add(camera);
 
-log_output(mesh, camera);
+log_output(group, camera);
 
 // renderer
 const canvas = document.querySelector('.webgl');
