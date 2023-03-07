@@ -1,5 +1,4 @@
 import * as THREE from 'three'
-import { Group } from 'three';
 console.log(THREE);
 
 function log_output(mesh, camera) {
@@ -35,13 +34,11 @@ const cube2 = new THREE.Mesh(
 group.add(cube2);
 
 cube2.position.x = -2;
-
 const cube3 = new THREE.Mesh(
     new THREE.BoxGeometry(1,1,1),
     new THREE.MeshBasicMaterial( { color: 0x0000ff})
 );
 group.add(cube3);
-
 cube3.position.x = 2;
 
 //axes
@@ -52,7 +49,6 @@ scene.add(axesHelper);
 const camera = new THREE.PerspectiveCamera(75, sizes.width/sizes.height);
 camera.position.z = 5;
 scene.add(camera);
-
 log_output(group, camera);
 
 // renderer
@@ -61,6 +57,4 @@ const renderer = new THREE.WebGLRenderer({
     canvas: canvas
 });
 renderer.setSize(sizes.width, sizes.height);
-
 renderer.render(scene, camera);
- 
